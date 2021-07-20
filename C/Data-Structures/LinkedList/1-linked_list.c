@@ -18,7 +18,6 @@ struct node {
 };
 
 struct node *HEAD = NULL;
-struct node *TAIL = NULL;
 
 /**
  * @brief       head_insert() -- Insert a node at the HEAD of list
@@ -82,25 +81,22 @@ int main(int argc, char* argv[])
 {
         head_insert(42);
         printf("%p\n", HEAD);
-        printf("%p\n", TAIL);
         head_insert(41);
         printf("%p\n", HEAD);
-        printf("%p\n", TAIL);
         head_insert(40);
         printf("%p\n", HEAD);
-        printf("%p\n", TAIL);
         head_insert(39);
         printf("%p\n", HEAD);
-        printf("%p\n", TAIL);
         head_insert(38);
         printf("%p\n", HEAD);
-        printf("%p\n", TAIL);
         head_insert(37);
         printf("%p\n", HEAD);
-        printf("%p\n", TAIL);
         tail_insert(43);
         printf("%p\n", HEAD);
-        printf("%p\n", TAIL);
+        tail_insert(44);
+        printf("%p\n", HEAD);
+        tail_insert(45);
+        printf("%p\n", HEAD);
         struct node *ptem = HEAD;
         while (ptem->next != NULL) {
                 ptem = ptem->next;
