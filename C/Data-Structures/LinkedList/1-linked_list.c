@@ -73,7 +73,7 @@ void tail_insert(int data)
         pn->data = data;
 
         while (ptem->next != NULL)
-                ptem++;
+                ptem = ptem->next;
         ptem->next = pn;
         pn->next = NULL;
 }
@@ -103,7 +103,7 @@ int main(int argc, char* argv[])
         printf("%p\n", TAIL);
         struct node *ptem = HEAD;
         while (ptem->next != NULL) {
-                ptem--;
+                ptem = ptem->next;
                 printf("%d ", ptem->data);
         }
         return 0;
