@@ -77,6 +77,31 @@ void tail_insert(int data)
         pn->next = NULL;
 }
 
+/**
+ * @brief       insert() -- Insert a node at the position of the list
+ * 
+ * @details     Add node to @pos next 
+ * 
+ * @note        
+ * 
+ * @param       data
+ * @param       pos
+ * 
+ * @return      void
+ * @retval      void
+*/
+void insert(struct node *pos, int data)
+{
+        struct node *ptem = HEAD;
+        struct node *pn = (struct node*) malloc(sizeof(struct node));
+        pn->data = data;
+
+        while (ptem->next != pos)
+                ptem = ptem->next;
+        pn->next = ptem->next;
+        ptem->next = pn;
+}
+
 int main(int argc, char* argv[])
 {
         head_insert(42);
