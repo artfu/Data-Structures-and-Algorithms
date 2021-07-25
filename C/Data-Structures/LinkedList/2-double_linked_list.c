@@ -1,28 +1,67 @@
 /**
  * @file        2-linked_list.c 
- * @author  
- * @date    
+ * @author      artfu 
+ * @date        2020.7.21 
  * 
  * @brief       Implement double linked lists(NO header) and related operations, 
  *              including insert, search, delete and other operations. 
  * 
- * @details     1. head_insert() -- Insert a node at the Head of list
- *              2. tail_insert() -- Insert a node at the END of list
- *              3. insert() -- Insert a node at the specific position of list
- *
- *              4. pos_of() -- search the position of specific value
- *              5. value_of() -- find the value on specific position 
- *              6. head_loc() -- locate the first node of list
- *              7. tail_loc() -- locate the last node of list
- *              8. prev() -- locate the previous node
- *              9. advan() -- locate the advanced node
- *
- *              10. del_node() -- delete node through the data
- *              11. del_list() -- delete the whole list
- *
- *              12. is_empty() -- check if the list is empty
- *              13. is_last() -- check if the node is the last one
- *
- *              14. print() -- print the list
+ * @details     
  */
 
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+        int data;
+        struct node *next;
+        struct node *prev;
+};
+
+/****************************     INSERT     **********************************/
+
+/**
+ * @brief       insert() -- insert a node to the list       
+ * 
+ * @details             
+ * 
+ * @note        What's the difference between linked list and double linked list? 
+ *              - the double linked list have another link to previous node.
+ *              And Why we need it? What's change when we have another pointer?
+ *              - we can easily find previous node.
+ *              - when insert a node, we have to deal with the prev pointer.
+ *              - so does delete.
+ *                      
+ *              This time we use another way instead of Global pointer(HEAD) as list
+ *              - Given a reference (pointer to pointer) to the head of a list
+ *              
+ *              And this rises another question -- How to creat a list?
+ *              a. Initialize function, which create the first node of a list
+ *                      or create a list with one node.
+ * 
+ * @param       head_ref        -- pointer to pointer                 
+ * @param       data            -- int value
+ * 
+ * @return      void
+ * @retval      void
+*/
+
+void insert(struct node** head_ref, int data) 
+{ 
+    struct node *ptem = (struct node*)malloc(sizeof(struct node)); 
+    ptem->data = data; 
+
+    ptem->prev = NULL;
+    ptem->next = NULL;
+
+    *head_ref = ptem;
+} 
+
+int main(int argc, char* argv[])
+{
+        struct node *head = NULL;
+        insert(&head, 3);
+
+        printf("%d", head->data);
+        return 0;
+}
