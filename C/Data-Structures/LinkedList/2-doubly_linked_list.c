@@ -21,12 +21,13 @@ struct node {
 /****************************     INSERT     **********************************/
 
 /**
- * @brief       insert() -- insert a node to the list       
+ * @brief       insert() -- insert a node to the head or tail of a list      
  * 
  * @details     like singly linked list, there are 3 conditons:
  *              1. add next node to head;
  *              2. add next node to tail;
  *              3. add the next node to a specific position.
+ *              This function can do 1 and 2.
  * 
  * @note        What's the difference between singly linked list and doubly linked list? 
  *              
@@ -42,10 +43,9 @@ struct node {
  * @return      void
  * @retval      void
 */
-void insert(struct node** head_ref, int data) 
+void head_insert(struct node **head_ref, int data) 
 { 
-        /* head insert node to an list */
-        struct node *ptr = (node*) malloc(sizeof(node));
+        struct node *ptr = (struct node*) malloc(sizeof(struct node));
         ptr->data = data;
 
         ptr->next = *head_ref;
@@ -55,15 +55,44 @@ void insert(struct node** head_ref, int data)
                 (*head_ref)->prev = ptr;
 
         *head_ref = ptr;
+}
 
-        /* tail insert node to an empty list */
+void tail_insert(struct node **head_ref, int data) 
+{ 
+        struct node *ptr = (struct node*) malloc(sizeof(struct node));
+        ptr->data = data;
+
+        struct node *tail = *head_ref;
+        if (tail != NULL) {
+                while (tail->next != NULL)
+                        tail = tail->next;
+                ptr->prev = tail;
+                ptr->next = NULL;
+                tail->next = ptr;
+        }
+        else {
+                ptr->prev = NULL;
+                ptr->next = NULL;
+                *head_ref = ptr;
+        }
 } 
 
 int main(int argc, char* argv[])
 {
         struct node *head = NULL;
-        insert(&head, 3);
+        tail_insert(&head, 4);
+        tail_insert(&head, 5);
+        tail_insert(&head, 6);
+        head_insert(&head, 1);
+        head_insert(&head, 2);
+        head_insert(&head, 3);
 
-        printf("%d", head->data);
+        // 3 2 1 4 5 6
+        struct node *p = head;
+        while (p) {
+                printf("%d ", p->data);
+                p = p->next;
+        }
+
         return 0;
 }
