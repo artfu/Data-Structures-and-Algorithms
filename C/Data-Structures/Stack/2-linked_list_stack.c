@@ -53,10 +53,7 @@ int main(int argc, char** argv)
         printf("%p\n", s);
 
         struct stack *p = s;
-        printf("%p\n", p);
-        /*
         while (p->next)
                 printf("%d ", p->data);
-        */
         return 0;
 }
