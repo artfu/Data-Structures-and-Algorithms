@@ -22,12 +22,11 @@ struct header {
 struct header* init()
 {
         struct header *list = (struct header*) malloc(sizeof(struct header));
-        list->head = (struct node*) malloc(sizeof(struct node));
-        list->head->next = NULL;
+        list->head = NULL;
         return list;
 }
 
-int add_node(struct node *head, int data)
+void add_node(struct node **head, int data)
 {
         struct node *p = (struct node*) malloc(sizeof(struct node));
         if (!p) {
@@ -35,9 +34,8 @@ int add_node(struct node *head, int data)
                 exit(1);
         } else {
                 p->data = data;
-                p->next = head;
-                head = p;
-                return 0;
+                p->next = *head;
+                *head = p;
         }
 }
 
@@ -45,7 +43,13 @@ int main(int argc, char** argv)
 {
         struct header *list = init();
 
-        add_node(list->head, 100);
+        add_node(&(list->head), 100);
+
+        struct node* p = list->head;
+        while (p) {
+            printf("%d ", p->data);
+            p = p->next;
+        }
 
         return 0;
 }
