@@ -18,17 +18,15 @@ struct stack {
 
 void init(struct stack **s)
 {
-        s = NULL;
+        *s = NULL;
 }
 
 void push(struct stack **s, int data)
 {
         struct stack *p = (struct stack*) malloc(sizeof(struct stack));
         p->data = data;
-
         p->next = *s;
         *s = p;
-        //printf("%p\n", s);
 }
 
 void pop(struct stack *s)
@@ -41,22 +39,16 @@ void pop(struct stack *s)
 int main(int argc, char** argv)
 {
         struct stack *s;
-        printf("%p\n", s);
         init(&s);
-        printf("%p\n", s);
 
         push(&s, 100);
-        printf("%p\n", s);
         push(&s, 200);
-        printf("%p\n", s);
         push(&s, 300);
-        printf("%p\n", s);
 
         struct stack *p = s;
-        printf("%p\n", p);
-        /*
-        while (p->next)
+        while (p) {
                 printf("%d ", p->data);
-        */
+                p = p->next;
+        }
         return 0;
 }
