@@ -1,7 +1,7 @@
 /**
  * @file        1-sequential_queue.c
  * @author      artfu
- * @date        2020.7.27
+ * @date        2020.8.5
  *
  * @brief       circular queue
  *
