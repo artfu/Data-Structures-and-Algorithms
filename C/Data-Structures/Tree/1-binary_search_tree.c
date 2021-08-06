@@ -88,6 +88,11 @@ struct node* top(struct stack *ps)
         return ps->ptr;
 }
 
+int empty(struct stack *ps)
+{
+        return ps == NULL;
+}
+
 void level_traverse(struct node *tree)
 {
         struct stack S;
@@ -95,14 +100,16 @@ void level_traverse(struct node *tree)
 
         push(&head, tree);
         
-        struct node *p = top(head); 
-        pop(head);
-        printf("%d\n", p->data);
+        while (!empty(head)) {
+                struct node *p = top(head); 
+                pop(head);
+                printf("%d\n", p->data);
 
-        if (p->lchild)
-                push(&head, p->lchild);
-        if (p->rchild)
-                push(&head, p->rchild);
+                if (p->lchild)
+                        push(&head, p->lchild);
+                if (p->rchild)
+                        push(&head, p->rchild);
+        }
 }
 
 int main(int argc, char** argv)
